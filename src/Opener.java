@@ -18,8 +18,8 @@ class Opener {
                 System.out.println("Ошибка: введите число от 1 до " + result.query.search.length);
                 return;
             }
-            Answer.SearchItem selectedItem = result.query.search[choice - 1];
-            String url = selectedItem.getUrl();
+            Answer.SearchItem selected = result.query.search[choice - 1];
+            String url = selected.getUrl();
             browse(url);
             selection(sc, result, answer);
         } catch (Exception e) {
@@ -31,4 +31,5 @@ class Opener {
         Desktop.getDesktop().browse(new URI(url));
         System.out.println("Статья открыта");
     }
+
 }
