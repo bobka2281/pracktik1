@@ -4,20 +4,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 public class Search {
-    private static final String link =
-            "https://ru.wikipedia.org/w/api.php";
-    private static final String user =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64)";
     public String wiki(String query) throws Exception {
-        String encodedQuery = URLEncoder.encode(query, "UTF-8");
-        String urlString = link
-                + "?action=query&list=search&srsearch="
-                + encodedQuery
+        String encode = URLEncoder.encode(query, "UTF-8");
+        String urlStr =  "https://ru.wikipedia.org/w/api.php?action=query&list=search&srsearch="
+                + encode
                 + "&format=json&utf8=1";
-        URL url = new URL(urlString);
+        URL url = new URL(urlStr);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", user);
+        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
         BufferedReader reader = new BufferedReader( new InputStreamReader(con.getInputStream()));
         StringBuilder response = new StringBuilder();
         String line;
