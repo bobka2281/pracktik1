@@ -1,5 +1,7 @@
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 class Opener {
     public void selection(Scanner sc, Answer.SearchRes result, Answer answer) {
@@ -14,22 +16,16 @@ class Opener {
                 System.out.println("Выход из программы");
                 return;
             }
-            if (choice < 1 || choice > result.query.search.length) {
-                System.out.println("Ошибка: введите число от 1 до " + result.query.search.length);
-                return;
-            }
             Answer.SearchItem selected = result.query.search[choice - 1];
             String url = selected.getUrl();
-            browse(url);
+            browser(url);
             selection(sc, result, answer);
-        } catch (Exception e) {
+        } catch (NumberFormatException | IOException | URISyntaxException e) {
             System.out.println("Введите корректное число");
-
         }
     }
-    private void browse(String url) throws Exception {
+    private void browser(String url) throws IOException, URISyntaxException {
         Desktop.getDesktop().browse(new URI(url));
         System.out.println("Статья открыта");
     }
-
 }
