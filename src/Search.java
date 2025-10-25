@@ -1,14 +1,13 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 public class Search {
-    public String wiki(String query) throws Exception {
+    public String wiki(String query) throws IOException {
         String encode = URLEncoder.encode(query, "UTF-8");
-        String urlStr =  "https://ru.wikipedia.org/w/api.php?action=query&list=search&srsearch="
-                + encode
-                + "&format=json&utf8=1";
+        String urlStr =  "https://ru.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + encode + "&format=json&utf8=1";
         URL url = new URL(urlStr);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
